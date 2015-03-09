@@ -4,7 +4,8 @@
   "description": "Simple wrapper for ADB commands.",
   "main": "index.js",
   "scripts": {
-    "test": "test me"
+    "test": "mocha --compilers js:babel/register --require should",
+    "compile": "babel src --out-dir lib"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,9 @@
   },
   "homepage": "https://github.com/atask/doodadb",
   "devDependencies": {
-    "jasmine": "^2.2.1"
+    "babel": "^4.6.6",
+    "mocha": "^2.1.0",
+    "should": "^5.1.0",
+    "sinon": "^1.13.0"
   }
 }
