@@ -4,7 +4,8 @@
   "description": "Simple wrapper for ADB commands.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel/register --require should",
+    "test": "mocha --compilers js:babel/register --require should --require babelhook",
+    "test:debug": "mocha --debug-brk --compilers js:babel/register --require should --require babelhook",
     "compile": "babel src --out-dir lib"
   },
   "repository": {
@@ -24,6 +25,7 @@
   "devDependencies": {
     "babel": "^4.6.6",
     "mocha": "^2.1.0",
+    "mockery": "^1.4.0",
     "should": "^5.1.0",
     "sinon": "^1.13.0"
   }
