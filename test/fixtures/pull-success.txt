@@ -1,0 +1,12 @@
+pull: building file list...
+pull: sdcard/a.jpg -> ./a.jpg
+pull: sdcard/b.jpg -> ./b.jpg
+pull: sdcard/c.jpg -> ./c.jpg
+pull: sdcard/d.jpg -> ./d.jpg
+pull: sdcard/e.jpg -> ./e.jpg
+pull: sdcard/f.jpg -> ./f.jpg
+pull: sdcard/g.jpg -> ./g.jpg
+pull: sdcard/h.jpg -> ./h.jpg
+pull: sdcard/.nomedia -> ./.nomedia
+9 files pulled. 0 files skipped.
+2505 KB/s (314548 bytes in 0.122s)
