@@ -1,4 +1,4 @@
-import fs from fs;
+import fs from 'fs';
 
 function fixturesNone(command, callback) {
     fs.readFile('./fixtures/devices-none.txt', 'utf8', (err, data) => {
@@ -8,3 +8,9 @@ function fixturesNone(command, callback) {
         callback(data);
     });
 }
+
+export default {
+    devices: {
+        none: fixturesNone
+    }
+};

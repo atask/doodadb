@@ -1,8 +1,12 @@
 import sinon from 'sinon';
 import mockery from 'mockery';
 
-import execFixtures from 'fixtures';
+import execFixtures from './fixtures';
 import devices from '../src/devices';
+
+execFixtures.devices.none('aaa', function tst() {
+    console.log('assa');
+});
 
 describe('devices', () => {
     it('should return a list of connected devices', (done) => {
