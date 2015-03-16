@@ -15,20 +15,19 @@ function execFixture(fixture, command, callback) {
 
 function spawnFixture(fixture, command) {
     var fixturePath = path.join(process.cwd(), 'test/fixtures', fixture);
+    var spawn = Object.create(EventEmitter.prototype);
+    spawn.stderr = Object.create(EventEmitter.prototype);
     fs.readFile(fixturePath, 'utf8', (err, data) => {
         if (err) {
             throw 'Erro reading fixture file.';
         }
 
-        var spawn = Object.create(EventEmitter.prototype);
-        spawn.stderr = Object.create(EventEmitter.prototype);
         setImmediate(() => {
             data.split(/\r?\n/).forEach(line => spawn.stderr.emit('data', line));
             spawn.emit('close'); 
         });
-
-        return spawn;
     });
+    return spawn;
 }
 
 export default {

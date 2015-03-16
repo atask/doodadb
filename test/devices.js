@@ -4,12 +4,20 @@ import mockery from 'mockery';
 import execFixtures from './fixtures';
 import devices from '../src/devices';
 
-execFixtures.devices.none('aaa', function tst() {
-    console.log('assa');
-});
 
 describe('devices', () => {
     it('should return a list of connected devices', (done) => {
+        execFixtures.devices.none('aaa', function tst() {
+            console.log('assa');
+        });
+
+        var sp = execFixtures.pull.success();
+        sp.stderr.on('data', data => console.log('PULL_STDERR:' + data));
+        sp.on('close', () => {
+            console.log('PULL_CLOSE');
+            done();
+        });
+        /*
         mockery.registerMock('child_process', { exec: execFixtures.devices.two });
 
         var result = devices();
@@ -20,6 +28,7 @@ describe('devices', () => {
 
         mockery.deregisterMock('child_process');
         done();
+        */
     });
 
     it('should return an empty list if no devices attached', () => {
