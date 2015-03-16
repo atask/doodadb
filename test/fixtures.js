@@ -1,7 +1,11 @@
 import fs from 'fs';
+import path from 'path';
+import util from 'util';
+import { EventEmitter } from 'events';
 
-function fixturesNone(command, callback) {
-    fs.readFile('./fixtures/devices-none.txt', 'utf8', (err, data) => {
+function execFixture(fixture, command, callback) {
+    var fixturePath = path.join(process.cwd(), 'test/fixtures', fixture);
+    fs.readFile(fixturePath, 'utf8', (err, data) => {
         if (err) {
             throw 'Erro reading fixture file.';
         }
@@ -9,8 +13,34 @@ function fixturesNone(command, callback) {
     });
 }
 
+function spawnFixture(fixture, command) {
+    var fixturePath = path.join(process.cwd(), 'test/fixtures', fixture);
+    fs.readFile(fixturePath, 'utf8', (err, data) => {
+        if (err) {
+            throw 'Erro reading fixture file.';
+        }
+
+        var spawn = Object.create(EventEmitter.prototype);
+        spawn.stderr = Object.create(EventEmitter.prototype);
+        setImmediate(() => {
+            data.split(/\r?\n/).forEach(line => spawn.stderr.emit('data', line));
+            spawn.emit('close'); 
+        });
+
+        return spawn;
+    });
+}
+
 export default {
     devices: {
-        none: fixturesNone
+        none: execFixture.bind(null, 'devices-none.txt'),
+        one: execFixture.bind(null, 'devices-one.txt'),
+        two: execFixture.bind(null, 'devices-two.txt')
+    },
+    pull: {
+        success: spawnFixture.bind(null, 'pull-success.txt'),
+        interrupt: spawnFixture.bind(null, 'pull-interrupt.txt'),
+        noDevice: spawnFixture.bind(null, 'pull-noDevice.txt'),
+        noExists: spawnFixture.bind(null, 'pull-noExists.txt')
     }
 };

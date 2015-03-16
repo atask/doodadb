@@ -10,7 +10,7 @@ execFixtures.devices.none('aaa', function tst() {
 
 describe('devices', () => {
     it('should return a list of connected devices', (done) => {
-        mockery.registerMock('child_process', { exec: execFixtures.devicesTwo });
+        mockery.registerMock('child_process', { exec: execFixtures.devices.two });
 
         var result = devices();
         result.should.be.an.Array;
@@ -19,6 +19,7 @@ describe('devices', () => {
         result.should.containEql('10ec4f3e');
 
         mockery.deregisterMock('child_process');
+        done();
     });
 
     it('should return an empty list if no devices attached', () => {
