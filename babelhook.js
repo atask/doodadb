@@ -4,5 +4,5 @@
 // test code, and using the same babel options
 
 require("babel/register")({
-    //sourceMap: false
+    sourceMap: 'inline'
 });
