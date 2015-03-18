@@ -40,4 +40,29 @@ describe('devices', () => {
             });
     });
 
+    it('should emit an error if no device is attached', done => {
+        mockery.registerMock('child_process', { spawn: fixtures.pull.noDevice });
+        var errorFlag = false;
+        pull('/path/to/source', 'path/to/dest')
+            .on('error', () => errorFlag = true)
+            .on('end', stats => {
+                stats.should.equal(undefined);
+                pull.removeAllListeners();
+                mockery.deregisterMock('child_process');
+                done();
+            });
+    });
+
+    it('should emit an error if remote object does not exist', done => {
+        mockery.registerMock('child_process', { spawn: fixtures.pull.noExists });
+        var errorFlag = false;
+        pull('/path/to/source', 'path/to/dest')
+            .on('error', () => errorFlag = true)
+            .on('end', stats => {
+                stats.should.equal(undefined);
+                pull.removeAllListeners();
+                mockery.deregisterMock('child_process');
+                done();
+            });
+    });
 });
