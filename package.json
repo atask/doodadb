@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --compilers js:babel/register --require should --require babelhook",
-    "test:debug": "mocha --debug-brk --require babelhook --require should --compilers js:babel/register",
+    "test:debug": "mocha --debug-brk --require should --require babel/polyfill",
     "compile": "babel src --out-dir lib"
   },
   "repository": {

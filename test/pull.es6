@@ -2,7 +2,7 @@ import sinon from 'sinon';
 import mockery from 'mockery';
 
 import fixtures from './fixtures';
-import pull from '../src/pull';
+import pull from '../lib/pull';
 
 describe('devices', () => {
 
